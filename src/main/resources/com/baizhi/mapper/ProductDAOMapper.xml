@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.ProductDAO">
+    <select id="selectAll" resultType="product">
+        select id,name,price,upload_time uploadTime,file_name fileName,content_type contentType,
+        path,descript,ind from t_product limit #{tol},#{size}
+    </select>
+
+    <update id="updateIndex" parameterType="product">
+        update t_product set ind=#{ind} where id=#{id}
+    </update>
+
+    <update id="update" parameterType="product">
+        update t_product set name=#{name},price=#{price},uploadTime=#{uploadTime},
+                fileName=#{fileName},contentType=#{contentType},path=#{path},
+                descript=#{descript} where id=#{id}
+    </update>
+
+    <select id="selectOne" parameterType="string" resultType="product">
+        select id,name,price,upload_time uploadTime,file_name fileName,content_type contentType,path,descript,ind from t_product
+        where id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="product">
+        INSERT into t_product(id,name,price,upload_time,file_name,content_type,path,descript,ind)
+        values(#{id},#{name},#{price},#{uploadTime},#{fileName},#{contentType},#{path},#{descript},#{ind,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectCount" resultType="Integer">
+        select count(*) from t_product
+    </select>
+</mapper>
